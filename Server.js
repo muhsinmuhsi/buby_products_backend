@@ -1,5 +1,6 @@
 import express from 'express';
 import authRoutes from './routes/authRoutes.js'
+import productRoutes from './routes/productRoutes.js'
 import mongoose from 'mongoose';
 import dotenv from 'dotenv'
 const PORT=process.env.PORT || 5000;
@@ -9,6 +10,7 @@ dotenv.config()
 
 app.use(express.json());
 app.use('/api/users',authRoutes)
+app.use('/api/users',productRoutes)
 
 app.use('/',(req,res)=>{
     res.send("thsis is starting")

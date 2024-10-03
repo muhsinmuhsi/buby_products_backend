@@ -5,7 +5,7 @@ const TryCatchMiddleware=(handler)=>{
         } catch (error) {
             console.error(error);
             res.status(500).json({
-                status:'failue',
+                status:'failier',
                 messege:'error',
                 error_messege:error.messege
             });

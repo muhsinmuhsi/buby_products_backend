@@ -5,7 +5,9 @@ dotenv.config()
 
 export const usertocken=(req,res,next)=>{
     try {
-        const tocken=req.headers["authorization"];
+        const tocken=req.headers["authorization"]
+        console.log(req.headers);
+        
         if(!tocken){
             return res.status(403).json({messege:'tocken not provided'})
         }

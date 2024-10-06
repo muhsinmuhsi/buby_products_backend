@@ -4,6 +4,7 @@ import { viewproduct,productById,productBycategory } from "../Controllers/produc
 import TryCatchMiddleware from "../middelwares/TryCatchMiddleware.js";
 import { addToCart,viewCart,incrementCartItemqunity,decrementCartItemquntity,RemoveCart } from "../Controllers/cartcontroller.js";
 import { addwishlist,viewWishlist,removeWishlist } from "../Controllers/wishlistControlls.js";
+import {payment,verifyPayment} from '../Controllers/paymentController.js'
 
 const route=exprss.Router()
 
@@ -26,5 +27,10 @@ route.delete('/:userId/cart/:productId/remove',TryCatchMiddleware(RemoveCart))
 route.post('/:userId/wishlist/:productId',TryCatchMiddleware(addwishlist))
 route.get('/:id/wishlist',TryCatchMiddleware(viewWishlist))
 route.delete('/:userId/wishlist/:productId/remove',TryCatchMiddleware(removeWishlist))
+
+//payment route
+
+route.post('/payment/:id',TryCatchMiddleware(payment))
+route.post('/verifypayment',TryCatchMiddleware(verifyPayment))
 
 export default route

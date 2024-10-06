@@ -16,6 +16,8 @@ export const usertocken=(req,res,next)=>{
                 res.status(401).json({messege:'unauthorized'})
             }
             req.email=decode.email;
+            console.log(decode,'decode');
+        
             next();            
         })
     } catch (error) {

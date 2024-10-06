@@ -23,17 +23,21 @@ const userSchema = new mongoose.Schema({
         default: Date.now,
         required: true
     },
-    isDeleted: { // fixed spelling mistake
+    isDeleted: { 
         type: Boolean,
         default: false
     },
     cart: [{
         type: mongoose.Schema.Types.ObjectId,
-        ref: 'Cart' // fixed case sensitivity issue
+        ref: 'Cart' // 
     }],
     wishlist:[{
         type:mongoose.Schema.Types.ObjectId,
         ref:'wishlist'
+    }],
+    orders:[{
+        type:mongoose.Schema.Types.ObjectId,
+        ref:'Orders'
     }]
 }, { timestamps: true });
 

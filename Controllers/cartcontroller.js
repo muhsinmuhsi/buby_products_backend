@@ -54,6 +54,8 @@ export const addToCart = async (req,res)=>{
       path:"cart",
       populate:{path:"productId"}
   })
+  console.log(user,'im pro');
+  
 
     if(!user){
       return res.status(404).json({messege:'user not found'})

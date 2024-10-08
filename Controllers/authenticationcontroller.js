@@ -11,7 +11,7 @@ export const register=async (req,res,next)=>{
         return res.status(400).json({messege:'found validation error'})
     }
 
-    const {username,image,email,password}=value;
+    const {username,email,password}=value;
     try {
          const isExcistinguser = await User.findOne({email:email})
 
@@ -25,7 +25,7 @@ export const register=async (req,res,next)=>{
 
          const newuser=new User({
             username:username,
-            image:image,
+            image:req.cloudinaryImageUrl,
             email:email,
            password:hashedpassword
          }) 

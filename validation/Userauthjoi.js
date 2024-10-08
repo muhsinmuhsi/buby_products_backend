@@ -18,11 +18,11 @@ const UserAuthJoi = joi.object({
         'any.required': 'Email is a required field'
       }),
 
-    image: joi.string().uri().required()
-      .messages({
-        'string.empty': 'Image URL is required',
-        'string.uri': 'Image must be a valid URL'
-      }),
+    // image: joi.string().uri().required()
+    //   .messages({
+    //     'string.empty': 'Image URL is required',
+    //     'string.uri': 'Image must be a valid URL'
+    //   }),
 
     password: joi.string().min(8).required()
         .pattern(new RegExp("^[a-zA-Z0-9]{8,30}$"))

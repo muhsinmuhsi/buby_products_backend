@@ -5,6 +5,7 @@ import mongoose from 'mongoose';
 import dotenv from 'dotenv';
 import path from 'path';
 import { fileURLToPath } from 'url';
+import adminroute from './routes/adminRoute.js'
 
 // Fix for ES module __dirname
 const __filename = fileURLToPath(import.meta.url);
@@ -20,6 +21,7 @@ app.use(express.json());
 
 app.use('/api/users', authRoutes);
 app.use('/api/users', productRoutes); 
+app.use('/api/admin',adminroute)
 
 app.use(express.static(__dirname));
 

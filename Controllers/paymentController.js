@@ -86,7 +86,8 @@ console.log(razorpay_signature,'razarpay sign');
         totalPrice: order.amount / 100,
         status: 'paid'
     })
-
+    console.log(newOrder,'this is new ordere');
+    
     await newOrder.save()
     user.orders.push(newOrder)
     await user.save();

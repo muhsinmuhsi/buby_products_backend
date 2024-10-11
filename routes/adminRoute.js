@@ -4,6 +4,7 @@ import { adminTocken } from "../middelwares/adminAuthmiddle.js";
 import TryCatchMiddleware from "../middelwares/TryCatchMiddleware.js";
 import uploadImage from "../middelwares/uploadmiddelware.js";
 import { adminAddProduct,adminUpdateproduct,adminviewproduct,admindeleteproductbyid,adminviewproductbyid,adminproductbycategery    } from "../Controllers/adminProductController.js";
+import { orderdetails,stats } from "../Controllers/admin orderdetails.js";
 
 const router=express.Router()
 //admin login 
@@ -36,6 +37,10 @@ router.put('/products/edit/:productId',TryCatchMiddleware(adminUpdateproduct))
 router.delete('/products/delete/:productId',TryCatchMiddleware(admindeleteproductbyid))
 
 
+
+router.get('/orders',TryCatchMiddleware(orderdetails))
+
+router.get('/stats',TryCatchMiddleware(stats))
 
 
 export default router;

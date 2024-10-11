@@ -7,10 +7,13 @@ const orderSchema=new mongoose.Schema({
         ref:'User',
         required:true        
     },
-    productId:[{
-        type:mongoose.Schema.Types.ObjectId,
-        ref:'products',
-        required:true
+    products: [{
+        productId: {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: "products",
+            required: true,
+        },
+     
     }],
     purchaseDate:{
         type:Date,

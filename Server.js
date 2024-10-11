@@ -6,6 +6,7 @@ import dotenv from 'dotenv';
 import path from 'path';
 import { fileURLToPath } from 'url';
 import adminroute from './routes/adminRoute.js'
+import cors from 'cors'
 
 // Fix for ES module __dirname
 const __filename = fileURLToPath(import.meta.url);
@@ -15,6 +16,8 @@ const PORT = process.env.PORT || 5000;
 const app = express();
 
 dotenv.config();
+
+app.use(cors())
 
 app.use(express.json());
 

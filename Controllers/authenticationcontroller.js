@@ -8,9 +8,12 @@ import jwt from 'jsonwebtoken'
 export const register=async (req,res,next)=>{
     const {value,error}=usereauthjoi.validate(req.body);
     if(error){
+      console.log(error,'this is the error');
         return res.status(400).json({messege:'found validation error'})
+        
+        
     }
-
+console.log('rwgister achived',value);
     const {username,email,password}=value;
     try {
          const isExcistinguser = await User.findOne({email:email})

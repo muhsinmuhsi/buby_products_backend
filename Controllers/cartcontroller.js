@@ -54,8 +54,6 @@ export const addToCart = async (req,res)=>{
       path:"cart",
       populate:{path:"productId"}
   })
-  console.log(user,'im pro');
-  
 
     if(!user){
       return res.status(404).json({messege:'user not found'})
@@ -64,6 +62,7 @@ export const addToCart = async (req,res)=>{
     if(!user.cart||user.cart.length===0){
       return res.status(200).json({messege:'yout cart is empty',data:[]})
     }
+    
     res.status(200).json(user.cart)
 
   }
@@ -71,14 +70,20 @@ export const addToCart = async (req,res)=>{
 
 
 export const incrementCartItemqunity= async (req,res)=>{
+  // console.log('this is increment ',req.body);
+
+  console.log('ssssssssssssss');
+  
+  
   const userId=req.params.userId
-  const productId=req.params.productId
+  const productId=req.params.id
 //user find
   const user=await User.findById(userId)
   if(!user){
     return res.status(404).json({messege:'user not found'})
   }
   //produnt find
+console.log('this is product id frmon increment quntity',productId);
 
   const product=await products.findById(productId)
   
@@ -138,7 +143,8 @@ export const decrementCartItemquntity=async (req,res)=>{
 export const RemoveCart= async (req,res)=>{
   const {userId,productId}=req.params;
   
-
+  console.log('this is removecart');
+  
  const user=await User.findById(userId)
  if(!user){
   return res.status(404).json({messege:'user not found'})

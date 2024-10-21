@@ -32,7 +32,7 @@ router.get('/products/:productId',TryCatchMiddleware(adminviewproductbyid))
 
 router.get('/products/category/:categoryname',TryCatchMiddleware(adminproductbycategery))
 
-router.put('/products/edit/:productId',TryCatchMiddleware(adminUpdateproduct))
+router.put('/products/edit/:productId',uploadImage,TryCatchMiddleware(adminUpdateproduct))
 
 router.delete('/products/delete/:productId',TryCatchMiddleware(admindeleteproductbyid))
 

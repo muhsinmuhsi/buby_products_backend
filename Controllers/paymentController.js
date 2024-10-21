@@ -20,6 +20,9 @@ export const payment = async (req, res) => {
         populate: { path: "productId" }
     })
 
+    console.log('thisjl',user);
+    
+
     if (!user) {
         return res.status(404).json({ messege: 'user not found' })
     }
@@ -49,16 +52,21 @@ console.log(productNames,'producnames');
     };
 
     const order = await razorpay.orders.create(options);
-    res.json(order)
+    res.status(200).json({
+        id:order.id,
+        amount:order.amount,
+        currency:order.currency
+    })
 }
 
 export const verifyPayment = async (req, res) => {
     const { razorpay_order_id, razorpay_payment_id, razorpay_signature } = req.body;
+
     const hmac = crypto.createHmac('sha256', process.env.Razorpay_key_secret);
     hmac.update(razorpay_order_id + '|' + razorpay_payment_id);
     const generatedSignature = hmac.digest('hex')
-
     console.log(generatedSignature,'genreted signatre');
+    
 console.log(razorpay_signature,'razarpay sign');
 
 
@@ -86,7 +94,8 @@ console.log(razorpay_signature,'razarpay sign');
         totalPrice: order.amount / 100,
         status: 'paid'
     })
-    console.log(newOrder,'this is new ordere');
+
+    console.log(newOrder,'this is new ordere');  
     
     await newOrder.save()
     user.orders.push(newOrder)

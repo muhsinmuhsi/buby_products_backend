@@ -21,6 +21,7 @@ export const addwishlist=async (req,res)=>{
    let wishlistitem = await wishlist.findOne({userId:user._id, produtId:product._id})
 
    if(wishlistitem){
+    
     return res.status(200).json({messege:'product already exist in wishlist'})
    }
 

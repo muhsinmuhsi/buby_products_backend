@@ -14,7 +14,7 @@ export const adminTocken=async(req,res,next)=>{
 
         JWT.verify(tocken,process.env.ADMIN_SECRET_KEY,(error,decode)=>{
             if(error){
-                res.status(401).json({messge:'Unauthorized'})
+               return  res.status(401).json({messge:'Unauthorized'})
             }
 
             req.email=decode.email
@@ -22,7 +22,7 @@ export const adminTocken=async(req,res,next)=>{
         })
 
     } catch (error) {
-        res.status(500).json({messge:'intrenel server error'})
+      return  res.status(500).json({messge:'intrenel server error'})
         next(error)
     }
 }

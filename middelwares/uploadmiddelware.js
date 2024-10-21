@@ -45,7 +45,8 @@ const uploadImage = (req, res, next) => {
             // Write the buffer data to the upload stream
             stream.end(req.file.buffer);
         } else {
-            return res.status(400).json({ message: "No file uploaded" });
+            // return res.status(400).json({ message: "No file uploaded" });
+            next()
         }
     });
 };

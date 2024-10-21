@@ -50,16 +50,19 @@ export const login = async (req,res,next)=>{
     const {email,password}=req.body;
 try {
     const isuservalid =await User.findOne({email})
+    
+    console.log(password,"this login achievedlkjlkj");
 
      if(!isuservalid){
         return res.status(404).json({error:'user not found'})
      }
-
-     const validPass = bcryptjs.compareSync(password,isuservalid.password)
     
+     const validPass = bcryptjs.compareSync(password,isuservalid.password)
+     
      if(!validPass){
         return res.status(404).json({error:'wrong credential'})
      }
+     
     //jwt setting
      const tocken = jwt.sign({id:isuservalid._id},process.env.JWT_SECRET)
      const {password:hashedpassword,...data }=isuservalid._doc;

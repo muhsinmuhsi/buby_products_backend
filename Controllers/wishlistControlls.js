@@ -2,7 +2,7 @@ import products from "../Models/productmodel.js";
 import wishlist from "../Models/wishlistModel.js";
 import User from "../Models/userModel.js";
 
-export const addwishlist=async (req,res)=>{
+export const addAndRemoveWishlist=async (req,res)=>{
     const userId=req.params.userId
     const productId=req.params.productId
 
@@ -18,11 +18,22 @@ export const addwishlist=async (req,res)=>{
     return res.status(404).json({messege:'product not found'})
    }
 
-   let wishlistitem = await wishlist.findOne({userId:user._id, produtId:product._id})
-
+   let wishlistitem = await wishlist.findOne({userId:user._id, productId:product._id})
+console.log('this is from wishlist conronl',wishlistitem);
    if(wishlistitem){
-    
-    return res.status(200).json({messege:'product already exist in wishlist'})
+    // return res.status(200).json({messege:'product already exist in wishlist'})
+
+    const wishlistIndex=  user.wishlist.findIndex(item => item.equals(wishlistitem._id))
+
+    if(wishlistIndex !==-1){
+       user.wishlist.splice(wishlistIndex,1)
+       await user.save()
+    }
+
+    return res.status(200).json({messege:'product removed from wishlist successfully'})
+
+
+    //-------------------------------------------------
    }
 
    wishlistitem = await wishlist.create({

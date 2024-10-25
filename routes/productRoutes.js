@@ -1,9 +1,9 @@
 import { usertocken } from "../middelwares/authMiddleware.js";
 import exprss from 'express'
-import { viewproduct,productById,productBycategory } from "../Controllers/productcantrolls.js";
+import { viewproduct,productById,productBycategory,orderbyid } from "../Controllers/productcantrolls.js";
 import TryCatchMiddleware from "../middelwares/TryCatchMiddleware.js";
 import { addToCart,viewCart,incrementCartItemqunity,decrementCartItemquntity,RemoveCart } from "../Controllers/cartcontroller.js";
-import { addwishlist,viewWishlist,removeWishlist } from "../Controllers/wishlistControlls.js";
+import { addAndRemoveWishlist,viewWishlist,removeWishlist } from "../Controllers/wishlistControlls.js";
 import {payment,verifyPayment} from '../Controllers/paymentController.js'
 
 const route=exprss.Router()
@@ -25,12 +25,13 @@ route.delete('/:userId/cart/:productId/remove',TryCatchMiddleware(RemoveCart))
 
 //wishlist route 
 
-route.post('/:userId/wishlist/:productId',TryCatchMiddleware(addwishlist))
+route.post('/:userId/wishlist/:productId',TryCatchMiddleware(addAndRemoveWishlist))
 route.get('/:id/wishlist',TryCatchMiddleware(viewWishlist))
 route.delete('/:userId/wishlist/:productId/remove',TryCatchMiddleware(removeWishlist))
 
 //payment route
 route.post('/payment/:id',TryCatchMiddleware(payment))
 route.post('/verifypayment',TryCatchMiddleware(verifyPayment))
+route.get('/:userId/orders',TryCatchMiddleware(orderbyid))
 
 export default route

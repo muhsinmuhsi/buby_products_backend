@@ -2,7 +2,12 @@
 import Orders from "../Models/orderModel.js";
 
 export const orderdetails=async (req,res)=>{
-  const orders=await Orders.find()
+  const orders=await Orders.find().populate({
+    path:'productId'
+  })
+
+  console.log(orders,'this orders frmon admin orderr details');
+  
 
   if(orders.length===0){
     return res.status(404).json({messege:'orders not found'})
@@ -15,7 +20,6 @@ export const orderdetails=async (req,res)=>{
 export const stats=async (req,res)=>{
 
     const totalstats= await Orders.aggregate([
-      {$unwind:"$products"},
       {
         $group:{
           _id:null,

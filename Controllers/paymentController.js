@@ -3,6 +3,7 @@ import dotenv from 'dotenv'
 import User from "../Models/userModel.js";
 import Orders from "../Models/orderModel.js";
 import crypto from 'crypto'
+import Cart from '../Models/cartModel.js'
 dotenv.config()
 
 
@@ -80,25 +81,32 @@ console.log(razorpay_signature,'razarpay sign');
         path: "cart",
         populate: { path: 'productId' }
     })
+  
+    let productids=[]
+    user.cart.map((item)=>{
+     productids.push(item.productId._id)
+    })
+    
+//  products: user.cart.map(item => ({
+//             productId: item.id,
+//             quantity: item.quantity,
+//             price: item.productId.price
+//         })),
 
     const newOrder = new Orders({
         userId: user.id,
-        products: user.cart.map(item => ({
-            productId: item.id,
-            quantity: item.quantity,
-            price: item.productId.price
-        })),
         amount: order.amount,
+        productId:productids,
         paymentId: razorpay_payment_id,
         orderId: razorpay_order_id,
         totalPrice: order.amount / 100,
         status: 'paid'
     })
-
-    console.log(newOrder,'this is new ordere');  
     
     await newOrder.save()
     user.orders.push(newOrder)
+    user.cart=[]
+    await Cart.deleteMany({userId:user._id})
     await user.save();
 
     res.send('payment verified successfully');

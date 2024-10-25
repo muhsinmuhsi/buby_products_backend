@@ -47,13 +47,14 @@ export const addToCart = async (req,res)=>{
 
   export const viewCart= async (req,res)=>{
     const {id} = req.params;
-    console.log(id,'ggg');
-    
+   
     const user= await User.findById(id)
     .populate({
       path:"cart",
       populate:{path:"productId"}
   })
+  console.log(user,'this is from cartview');
+  
 
     if(!user){
       return res.status(404).json({messege:'user not found'})

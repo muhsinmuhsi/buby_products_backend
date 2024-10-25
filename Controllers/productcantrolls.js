@@ -3,7 +3,6 @@ import products from '../Models/productmodel.js'
 import User from '../Models/userModel.js';
 
 export const viewproduct=async (req,res)=>{
-    console.log('thid is viewproduct');
     
         const produt=await products.find()
 
@@ -50,10 +49,7 @@ export const orderbyid=async (req,res)=>{
   if(!user){
     return res.status(404).json({messege:'user not found'})
   }
-
-  console.log('this is from orberby id ',user);
   
-
   if(!user.orders||user.orders.length===0){
     return res.status(200).json({messege:'no orders yet ',data:[]})
   }

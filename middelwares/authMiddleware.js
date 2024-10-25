@@ -6,7 +6,6 @@ dotenv.config()
 export const usertocken=(req,res,next)=>{
     try {
         const tocken=req.headers["authorization"];
-                 console.log('this is friom authmiddelware');
 
         
         if(!tocken){

@@ -20,8 +20,6 @@ export const payment = async (req, res) => {
         path: "cart",
         populate: { path: "productId" }
     })
-
-    console.log('thisjl',user);
     
 
     if (!user) {
@@ -35,11 +33,10 @@ export const payment = async (req, res) => {
     const amount = user.cart.reduce((total, item) => {
         return total += item.productId.price * item.quantity
     },0)
-    console.log(amount,'yyy');
     
 
     const productNames = user.cart.map(item => item.productId.title).join(', ')
-console.log(productNames,'producnames');
+
 
     const options = {
         amount: amount * 100, // amount in the smallest currency unit
@@ -66,9 +63,7 @@ export const verifyPayment = async (req, res) => {
     const hmac = crypto.createHmac('sha256', process.env.Razorpay_key_secret);
     hmac.update(razorpay_order_id + '|' + razorpay_payment_id);
     const generatedSignature = hmac.digest('hex')
-    console.log(generatedSignature,'genreted signatre');
     
-console.log(razorpay_signature,'razarpay sign');
 
 
     if (generatedSignature !== razorpay_signature) {

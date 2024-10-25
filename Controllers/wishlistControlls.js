@@ -19,7 +19,7 @@ export const addAndRemoveWishlist=async (req,res)=>{
    }
 
    let wishlistitem = await wishlist.findOne({userId:user._id, productId:product._id})
-console.log('this is from wishlist conronl',wishlistitem);
+   
    if(wishlistitem){
     // return res.status(200).json({messege:'product already exist in wishlist'})
 

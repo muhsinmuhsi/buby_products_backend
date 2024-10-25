@@ -13,8 +13,6 @@ export const login = async (req, res, next) => {
         const tocken = jwt.sign({ email }, process.env.ADMIN_SECRET_KEY)
 
         res.cookie('access_token', tocken, { httpOnly: true });
-
-        console.log(tocken,'tocek admoin ');
         
         return res.status(200).json({message: "Admin logged in successfully", tocken });
 

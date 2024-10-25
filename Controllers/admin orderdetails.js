@@ -5,10 +5,7 @@ export const orderdetails=async (req,res)=>{
   const orders=await Orders.find().populate({
     path:'productId'
   })
-
-  console.log(orders,'this orders frmon admin orderr details');
   
-
   if(orders.length===0){
     return res.status(404).json({messege:'orders not found'})
   }

@@ -5,8 +5,6 @@ import Cart from '../Models/cartModel.js'
 export const addToCart = async (req,res)=>{
     const userId=req.params.userId;
     const productId=req.params.productId;
-    console.log(productId,'userid addtocart');
-    
 
     //find user
    const user = await User.findById(userId)
@@ -16,7 +14,6 @@ export const addToCart = async (req,res)=>{
    if(user.isDelted===true) return res.status(210).json({messege:'Admin blocked'})
   //find product
    const product= await products.findById(productId)
-   console.log(productId,'rr');
    
    if(!product){
     return res.status(404).json({messege:'product not found'})
@@ -53,8 +50,6 @@ export const addToCart = async (req,res)=>{
       path:"cart",
       populate:{path:"productId"}
   })
-  console.log(user,'this is from cartview');
-  
 
     if(!user){
       return res.status(404).json({messege:'user not found'})
@@ -73,9 +68,7 @@ export const addToCart = async (req,res)=>{
 export const incrementCartItemqunity= async (req,res)=>{
   // console.log('this is increment ',req.body);
 
-  console.log('ssssssssssssss');
-  
-  
+
   const userId=req.params.userId
   const productId=req.params.id
 //user find
@@ -84,7 +77,7 @@ export const incrementCartItemqunity= async (req,res)=>{
     return res.status(404).json({messege:'user not found'})
   }
   //produnt find
-console.log('this is product id frmon increment quntity',productId);
+
 
   const product=await products.findById(productId)
   
@@ -144,8 +137,6 @@ export const decrementCartItemquntity=async (req,res)=>{
 export const RemoveCart= async (req,res)=>{
   const {userId,productId}=req.params;
   
-  console.log('this is removecart');
-  
  const user=await User.findById(userId)
  if(!user){
   return res.status(404).json({messege:'user not found'})
@@ -156,9 +147,9 @@ export const RemoveCart= async (req,res)=>{
   return res.status(404).json({messege:'product not found'})
  }
  
-console.log(productId,'userId removecart')
+
  const cartItem= await Cart.findOneAndDelete({userId:user._id,productId:product._id})
-console.log(cartItem,'cartItmel id');
+
 
  if(!cartItem){
   return res.status(404).json({messege:'product not found on user cart'})
@@ -171,7 +162,6 @@ console.log(cartItem,'cartItmel id');
   if (cartItemIndex !== -1) {
     user.cart.splice(cartItemIndex, 1);
     await user.save();
-    console.log(cartItemIndex,'this cartindes');
     
   }
 

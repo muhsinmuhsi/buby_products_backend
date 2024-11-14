@@ -16,7 +16,7 @@ route.get('/products',TryCatchMiddleware(viewproduct))
 route.get('/products/:id',TryCatchMiddleware(productById))
 route.get('/products/category/:categoryname',TryCatchMiddleware(productBycategory))
 
-//cart route
+//cart route    
 route.get('/:id/cart',TryCatchMiddleware(viewCart))
 route.post('/:userId/cart/:productId',TryCatchMiddleware(addToCart))
 route.patch('/:userId/cart/:id/increment',TryCatchMiddleware(incrementCartItemqunity))

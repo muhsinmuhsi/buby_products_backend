@@ -14,11 +14,14 @@ export const usertocken=(req,res,next)=>{
         jwt.verify(tocken,process.env.JWT_SECRET,(error,decode)=>{
             if(error){
                 res.status(401).json({messege:'unauthorized'})
-            }
-           
-            req.email=decode.email;
-        
+            } 
+           req.userId=decode
             next();
+
+            
+
+        
+            
 
         })
     } catch (error) {

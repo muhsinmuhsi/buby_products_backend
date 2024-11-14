@@ -35,7 +35,10 @@ export const viewAllusers=async(req,res,next)=>{
 export const adminviewUserbyid=async(req,res,next)=>{
     const {id}=req.params;
 
-    const user=await User.findById(id)
+    const user=await User.findById(id).populate({
+        path:'orders',
+        populate:{path:'productId'}
+    })
 
     if(!user){
         return res.status(404).json({message:'user not found'})

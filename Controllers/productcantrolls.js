@@ -29,13 +29,12 @@ export const productBycategory = async (req,res)=>{
             {category:{$regex:new RegExp(categoryname,'i')}},
             {title:{$regex:new RegExp(categoryname,'i')}}
         ]
-    }).select('title category price')
-
+    })
     if(!product){
         return res.status(404).json({messege:'item not found'})
     }
 
-    return res.status(200).json({product})
+    return res.status(200).json(product)
 }
 
 export const orderbyid=async (req,res)=>{

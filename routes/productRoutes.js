@@ -10,9 +10,9 @@ const route=exprss.Router()
 
 //products
 
-route.use(usertocken)
-route.get('/products',TryCatchMiddleware(viewproduct))
 
+route.get('/products',TryCatchMiddleware(viewproduct))
+route.use(usertocken)
 route.get('/products/:id',TryCatchMiddleware(productById))
 route.get('/products/category/:categoryname',TryCatchMiddleware(productBycategory))
 

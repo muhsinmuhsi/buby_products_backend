@@ -58,7 +58,7 @@ export const payment = async (req, res) => {
 }
 
 export const verifyPayment = async (req, res) => {
-    const { razorpay_order_id, razorpay_payment_id, razorpay_signature } = req.body;
+        const { razorpay_order_id, razorpay_payment_id, razorpay_signature } = req.body;
 
     const hmac = crypto.createHmac('sha256', process.env.Razorpay_key_secret);
     hmac.update(razorpay_order_id + '|' + razorpay_payment_id);
@@ -70,7 +70,7 @@ export const verifyPayment = async (req, res) => {
         return res.status(400).send('verification failed')
     }
 
-    const order = await razorpay.orders.fetch(razorpay_order_id);
+    const order = await razorpay.orders.fetch(razorpay_order_id);   
 
     const user = await User.findById(order.notes.userid).populate({
         path: "cart",
@@ -104,5 +104,5 @@ export const verifyPayment = async (req, res) => {
     await Cart.deleteMany({userId:user._id})
     await user.save();
 
-    res.send('payment verified successfully');
+   return  res.send('payment verified successfully');
 }
